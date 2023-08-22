@@ -41,12 +41,12 @@
         </div>
         <di class="col-xs-12 col-sm-12 col-md-12">
             <label for="kategori" class="form-label">Kategori</label>
-            <!-- <select class="form-select" name="kategori">
+            <select class="form-select" name="kategori">
                     <option value="1">Digital Printing</option>
                     <option value="2">Spanduk</option>
                     <option value="3">Poster</option>
-            </select>    -->
-            <input type="text" class="form-control " id="kategori" name="kategori"  required value="">   
+            </select>   
+            <!-- <input type="text" class="form-control " id="kategori" name="kategori"  required value="">    -->
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="image" class="form-label">Foto Produk</label>
