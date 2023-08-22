@@ -7,10 +7,10 @@
                 <h2>{{ $product->Produk }}</h2>
             </div>
             <div class="pull-right">
-            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
+            <form action="{{ route('products.destroy',$product->slug) }}" method="POST">
+                <a class="btn btn-info" href="{{ route('products.index') }}">back</a>
 
-                <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route('products.edit',$product->slug) }}">Edit</a>
 
                 @csrf
                 @method('DELETE')

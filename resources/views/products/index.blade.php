@@ -29,15 +29,15 @@
         @foreach ($products as $product)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $product->Produk }}</td>
-            <td>{{ $product->Harga }}</td>
-            <td>{{ $product->Kategori }}</td>
+            <td>{{ $product->produk }}</td>
+            <td>{{ $product->harga }}</td>
+            <td>{{ $product->kategori }}</td>
             <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                <form action="{{ route('products.destroy',$product->slug) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('products.show',$product->slug) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('products.edit',$product->slug) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')

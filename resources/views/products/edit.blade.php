@@ -30,35 +30,35 @@
          <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="tittle" class="form-label">Produk</label>
-            <input type="text" class="form-control " id="produk" name="produk" required autofocus value="{{$product->Produk}}">
+            <input type="text" class="form-control " id="produk" name="produk" required autofocus value="{{$product->produk}}">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="slug" class="form-label">Slug</label>
-            <input type="text" class="form-control " id="slug" name="slug"  required value="{{$product->Slug}}">
+            <input type="text" class="form-control " id="slug" name="slug"  required value="{{$product->slug}}">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="harga" class="form-label">Harga</label>
-            <input type="text" class="form-control " id="harga" name="harga"  required value="{{$product->Harga}}">
+            <input type="text" class="form-control " id="harga" name="harga"  required value="{{$product->harga}}">
         </div>
         <di class="col-xs-12 col-sm-12 col-md-12">
             <label for="kategori" class="form-label">Kategori</label>
-            <!-- <select class="form-select" name="kategori">
-                    <option value="1">Digital Printing</option>
-                    <option value="2">Spanduk</option>
-                    <option value="3">Poster</option>
-            </select>    -->
-            <input type="text" class="form-control " id="kategori" name="kategori"  required value="{{$product->Kategori}}">   
+            <select class="form-select" name="kategori">
+                <option value="Digital Printing">Digital Printing</option>
+                <option value="Spanduk">Spanduk</option>
+                <option value="Poster">Poster</option>
+            </select>   
+            <!-- <input type="text" class="form-control " id="kategori" name="kategori"  required value="">    -->
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="image" class="form-label">Foto Produk</label>
                 <!-- <img class="img-preview img-fluid mb-3 col-sm-5">
                 <input class="form-control " type="file" id="image" name="image" onchange="previewImage()">
                 <label for="image" class="form-label" style="font-size: 12px; color: rgb(209, 5, 5)">Dimensi Foto Harus 400x400 pixel & Max. Sizenya 1 MB</label> -->
-                <input type="text" class="form-control " id="foto" name="foto"  required value="{{$product->Foto}}">   
+                <input type="text" class="form-control " id="foto" name="foto"  required value="{{$product->foto}}">   
         </div>
         <di class="col-xs-12 col-sm-12 col-md-12">
             <label for="harga" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control " id="deskripsi" name="deskripsi"  required value="{{$product->Deskripsi}}"></input>
+            <textarea type="text" class="form-control " id="deskripsi" name="deskripsi"  required value="">{{$product->deskripsi}}</textarea>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Perbaruhi Produk</button>

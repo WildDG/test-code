@@ -40,26 +40,29 @@ class ProductController extends Controller
             'foto' => 'required',
             'deskripsi' => 'required',
         ]);
-  
+        
+        // return($request->all());
         Product::create($request->all());
-   
+        
         return redirect()->route('products.index')->with('success','Product created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($slug)
     {
-        return view('products.show',compact('product'));
+        $product = Product::where('Slug',$slug)->first();
+        return view('products.show',['product' => $product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($slug)
     {
-        return view('products.edit',compact('product'));
+        $product = Product::where('Slug',$slug)->first();
+        return view('products.edit',['product' => $product]);
     }
 
     /**
@@ -84,8 +87,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($slug)
     {
+        $product = Product::where('Slug',$slug)->first();
         $product->delete();
   
         return redirect()->route('products.index')->with('success','Product deleted successfully');
