@@ -10,8 +10,12 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+
+    
     /**
-     * Display a listing of the resource.
+     * Show All Data
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {

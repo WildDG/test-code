@@ -37,7 +37,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <label for="harga" class="form-label">Harga</label>
-            <input type="text" class="form-control " id="harga" name="harga"  required value="">
+            <input type="number" class="form-control " id="harga" name="harga"  required value="">
         </div>
         <di class="col-xs-12 col-sm-12 col-md-12">
             <label for="kategori" class="form-label">Kategori</label>

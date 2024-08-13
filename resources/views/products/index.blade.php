@@ -29,9 +29,9 @@
         @foreach ($products as $product)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $product->produk }}</td>
-            <td>{{ $product->harga }}</td>
-            <td>{{ $product->kategori }}</td>
+            <td>{{ $product->Produk }}</td>
+            <td>{{ $product->Harga }}</td>
+            <td>{{ $product->Kategori }}</td>
             <td>
                 <form action="{{ route('products.destroy',$product->slug) }}" method="POST">
    
