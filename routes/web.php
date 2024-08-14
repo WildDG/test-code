@@ -26,5 +26,9 @@ Route::controller(ProductController::class)->group(function(){
     Route::put('/update', 'update')->name('products.update');
     Route::get('/detail/{slug}', 'show')->name('products.show');
     Route::delete('/delete/{slug}', 'destroy')->name('products.destroy');
+
+    // Rute tambahan untuk rating
+    Route::get('/{slug}/rating', 'showRatingForm')->name('products.rating');
+    Route::put('/{slug}/rating', 'updateRating')->name('products.updateRating');
 });
 // Route::resource('products', ProductController::class);

@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-
-    
     /**
      * Show All Data
      *
@@ -20,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(5);
-        return view('products.index',compact('products'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('products.index', compact('products'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -43,12 +40,12 @@ class ProductController extends Controller
             'kategori' => 'required',
             'foto' => 'required',
             'deskripsi' => 'required',
+            // Tidak memerlukan rating saat membuat produk
         ]);
         
-        // return($request->all());
         Product::create($request->all());
         
-        return redirect()->route('products.index')->with('success','Product created successfully.');
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
     /**
@@ -56,8 +53,8 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        $product = Product::where('Slug',$slug)->first();
-        return view('products.show',['product' => $product]);
+        $product = Product::where('slug', $slug)->first();
+        return view('products.show', ['product' => $product]);
     }
 
     /**
@@ -65,8 +62,8 @@ class ProductController extends Controller
      */
     public function edit($slug)
     {
-        $product = Product::where('Slug',$slug)->first();
-        return view('products.edit',['product' => $product]);
+        $product = Product::where('slug', $slug)->first();
+        return view('products.edit', ['product' => $product]);
     }
 
     /**
@@ -81,11 +78,12 @@ class ProductController extends Controller
             'kategori' => 'required',
             'foto' => 'required',
             'deskripsi' => 'required',
+            'rating' => 'nullable|numeric|min:0|max:5',
         ]);
   
         $product->update($request->all());
   
-        return redirect()->route('products.index')->with('success','Product updated successfully');
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
     /**
@@ -93,9 +91,34 @@ class ProductController extends Controller
      */
     public function destroy($slug)
     {
-        $product = Product::where('Slug',$slug)->first();
+        $product = Product::where('slug', $slug)->first();
         $product->delete();
   
-        return redirect()->route('products.index')->with('success','Product deleted successfully');
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully');
+    }
+
+    /**
+     * Show the form for rating the specified product.
+     */
+    public function showRatingForm($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('products.rating', compact('product'));
+    }
+
+    /**
+     * Update the rating for the specified product.
+     */
+    public function updateRating(Request $request, $slug)
+    {
+        $request->validate([
+            'rating' => 'required|numeric|min:1|max:5',
+        ]);
+
+        $product = Product::where('slug', $slug)->firstOrFail();
+        $product->rating = $request->input('rating');
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Rating updated successfully');
     }
 }

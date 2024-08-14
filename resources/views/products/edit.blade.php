@@ -60,6 +60,11 @@
             <label for="harga" class="form-label">Deskripsi</label>
             <textarea type="text" class="form-control " id="deskripsi" name="deskripsi"  required value="">{{$product->deskripsi}}</textarea>
         </div>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="number" name="rating" class="form-control" step="0.1" min="0" max="5" value="{{ old('rating', $product->rating ?? '') }}">
+        </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Perbaruhi Produk</button>
         </div>
