@@ -34,18 +34,33 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'customer_name' => 'required',
             'produk' => 'required',
-            'slug' => 'required',
             'harga' => 'required',
+            'slug' => 'required|unique:products,slug',
             'kategori' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'required',
-            // Tidak memerlukan rating saat membuat produk
+            'tanggal_pembuatan' => 'required|date', 
         ]);
-        
-        Product::create($request->all());
-        
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+
+        $imagePath = $request->file('foto')->store('products', 'public');
+
+        $product = new Product([
+            'customer_name' => $request->input('customer_name'),
+            'produk' => $request->input('produk'),
+            'harga' => $request->input('harga'),
+            'slug' => $request->input('slug'),
+            'kategori' => $request->input('kategori'),
+            'foto' => $imagePath,
+            'deskripsi' => $request->input('deskripsi'),
+            'tanggal_pembuatan' => $request->input('tanggal_pembuatan'), 
+        ]);
+
+        $product->save();
+
+        return redirect()->route('products.index')
+                         ->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -72,17 +87,34 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
+            'customer_name' => 'required',
             'produk' => 'required',
             'slug' => 'required',
             'harga' => 'required',
             'kategori' => 'required',
             'foto' => 'required',
             'deskripsi' => 'required',
+            'tanggal_pembuatan' => 'required|date',
             'rating' => 'nullable|numeric|min:0|max:5',
         ]);
-  
-        $product->update($request->all());
-  
+
+        $imagePath = $product->foto;
+        if ($request->hasFile('foto')) {
+            $imagePath = $request->file('foto')->store('products', 'public');
+        }
+
+        $product->update([
+            'customer_name' => $request->input('customer_name'),
+            'produk' => $request->input('produk'),
+            'harga' => $request->input('harga'),
+            'slug' => $request->input('slug'),
+            'kategori' => $request->input('kategori'),
+            'foto' => $imagePath,
+            'deskripsi' => $request->input('deskripsi'),
+            'tanggal_pembuatan' => $request->input('tanggal_pembuatan'),
+            'rating' => $request->input('rating'),
+        ]);
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
@@ -93,7 +125,7 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
         $product->delete();
-  
+
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 

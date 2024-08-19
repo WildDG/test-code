@@ -24,16 +24,25 @@
         </div>
         <div class="col-md-6">
             <!-- Rating Form -->
-            <h3>Update Rating</h3>
-            <form action="{{ route('products.updateRating', $product->slug) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="rating">Rating:</label>
-                    <input type="number" name="rating" id="rating" class="form-control" min="1" max="5" step="0.1" value="{{ old('rating', $product->rating) }}">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Rating</button>
-            </form>
+            @if(is_null($product->rating))
+                <h3>Update Rating</h3>
+                <form action="{{ route('products.updateRating', $product->slug) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <select name="rating" id="rating" class="form-control">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Rating</button>
+                </form>
+            @else
+                <h3>Rating telah diberikan</h3>
+                <p>Anda sudah memberikan rating untuk produk ini: <strong>{{ $product->rating }}</strong></p>
+            @endif
         </div>
     </div>
 @endsection

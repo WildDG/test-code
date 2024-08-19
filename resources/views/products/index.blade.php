@@ -24,6 +24,7 @@
             <th>Nama</th>
             <th>Harga</th>
             <th>Kategori</th>
+            <th>Tanggal dan Waktu</th> <!-- Kolom Tanggal dan Waktu -->
             <th width="280px">Action</th>
         </tr>
         @foreach ($products as $product)
@@ -32,6 +33,7 @@
             <td>{{ $product->produk }}</td>
             <td>{{ $product->harga }}</td>
             <td>{{ $product->kategori }}</td>
+            <td>{{ $product->created_at->format('d M Y H:i:s') }}</td> <!-- Tanggal dan Waktu Pembuatan Produk -->
             <td>
                 <div class="d-flex">
                     <!-- Tombol Show -->
